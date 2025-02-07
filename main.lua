@@ -65,7 +65,15 @@ Tab:AddToggle({
                 pcall(function()
                     for _, player in pairs(game.Players:GetPlayers()) do
                         if player ~= game.Players.LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                            player.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                            local char = player.Character
+                            char.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                            
+                            -- Disable Collisions
+                            for _, part in pairs(char:GetChildren()) do
+                                if part:IsA("BasePart") then
+                                    part.CanCollide = false
+                                end
+                            end
                         end
                     end
                 end)
